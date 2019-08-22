@@ -1,23 +1,19 @@
-require 'json'
-
-package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
+require "json"
 
 Pod::Spec.new do |s|
-  s.name                = "RNSound"
-  s.version             = package['version']
-  s.summary             = package['description']
-  s.homepage            = "https://github.com/zmxv/react-native-sound"
-  s.license             = package['license']
-  s.author              = package['author']
-  s.source              = { :git => 'https://github.com/zmxv/react-native-sound.git', :tag => "v#{s.version}" }
-  s.default_subspec     = 'Core'
-  s.requires_arc        = true
-  s.platform            = :ios, "7.0"
-  
-  s.dependency 'React'
-  
-  s.subspec 'Core' do |ss|
-    ss.source_files     = "RNSound/*.{h,m}"
-  end
+  # NPM package specification
+  package = JSON.parse(File.read(File.join(File.dirname(__FILE__), "package.json")))
+
+  s.name         = "RNSound"
+  s.version      = package["version"]
+  s.summary      = "1"
+  s.homepage     = "https://github.com/ScoutIQ/react-native-sound"
+  s.license      = "MIT"
+  s.author       = { package["author"]["name"] => package["author"]["email"] }
+  s.platforms    = { :ios => "9.0", :tvos => "9.0" }
+  s.source       = { :git => "https://github.com/ScoutIQ/react-native-sound", :tag => "#{s.version}" }
+  s.source_files = "RNSound/**/*.{h,m}"
+
+  s.dependency "React"
 
 end
